@@ -19,10 +19,9 @@ weight = 2 * np.random.random((input_net, output_net)) - 1
 def activation(x):
     return 1 / (1 + np.exp(-x))  # sgd
 
-# дифференциал
-# получение значений частных производных по каждому весу между 1 и 2 слоями
+# диф-л по w
 
-def dif_w2(warr, xtrainarr, ytrain):
+def dif_w(warr, xtrainarr, ytrain):
     grad_w2 = np.zeros((input_net, output_net))
     output = 0
     for l_ in range(len(warr)):
@@ -41,7 +40,7 @@ epsilon = 0.05
 for i in range(epochs):
     print(weight)
     for k in range(len(x_train)):
-        weight = weight - epsilon * dif_w2(weight, x_train[k], y_train[k])
+        weight = weight - epsilon * dif_w(weight, x_train[k], y_train[k])
 
 def prediction(arr):
     a = float(*np.dot(arr, weight))
