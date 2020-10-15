@@ -20,19 +20,7 @@ def activation(x):
     return 1 / (1 + np.exp(-x))  # sgd
 
 # дифференциал
-# две функции нахождения градиента по весам на выбор. dif_w2 медленнее, однако устойчивее к общим изменениям
-def dif_w1(warr, xtrainarr, ytrain):
-    grad_w2 = np.zeros((2, 1))
-    output = 0
-    for l_ in range(len(warr)):
-        output = output + warr[l_] * xtrainarr[l_]
-    for l in range(len(warr)):
-        x, y = symbols('x y')
-        y = xtrainarr[l] * (1/(1+exp(-x)) - ytrain) ** 2
-        dif = diff(y, x)
-        f = lambdify(x, dif, 'numpy')
-        grad_w2[l] = f(output)
-    return grad_w2
+# получение значений частных производных по каждому весу между 1 и 2 слоями
 
 def dif_w2(warr, xtrainarr, ytrain):
     grad_w2 = np.zeros((input_net, output_net))
